@@ -10,8 +10,7 @@ int main() {
     cin >> row2 >> col2; 
  
     if (col1 != row2) { 
-        cout << "Matrix multiplication not possible. Columns of first matrix 
-must equal rows of second.\n"; 
+        cout << "Matrix multiplication not possible. Columns of first matrix must equal rows of second.\n";
         return 0; 
     } 
  
