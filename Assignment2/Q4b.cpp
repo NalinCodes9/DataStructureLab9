@@ -8,7 +8,7 @@ int main(){
     int low=0;
     int high=stri.length()-1;
     while(low<high){
-        int t=stri[high];
+        char t=stri[high];
         stri[high]=stri[low];
         stri[low]=t;
         low++;
