@@ -1,46 +1,42 @@
-#include <stdio.h>
-#include <ctype.h>
-#define MAX 100
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <stack>
+using namespace std;
+int post_Eval(string s){
+    stack<int> st;
+    for(int i=0;i<s.length();i++){
+        if(s[i]>='0' && s[i]<='9'){
+            st.push(s[i]-'0');
+        }
+        else{
+            int op2=st.top();
+            st.pop();
+            int op1=st.top();
+            st.pop();
 
-int stack[MAX];
-int top = -1;
-
-void push(int x) {
-    if (top < MAX - 1) {
-        stack[++top] = x;
-    }
-}
-
-int pop() {
-    if (top >= 0) {
-        return stack[top--];
-    }
-    return -1;
-}
-
-int evaluatePostfix(char exp[]) {
-    int i;
-    for (i = 0; exp[i] != '\0'; i++) {
-        if (isdigit(exp[i])) {
-            push(exp[i] - '0');
-        } else {
-            int val2 = pop();
-            int val1 = pop();
-            switch (exp[i]) {
-                case '+': push(val1 + val2); break;
-                case '-': push(val1 - val2); break;
-                case '*': push(val1 * val2); break;
-                case '/': push(val1 / val2); break;
+            if(s[i]=='+'){
+                st.push(op1+op2);
+            }
+            if(s[i]=='-'){
+                st.push(op1-op2);
+            }
+            if(s[i]=='/'){
+                st.push(op1/op2);
+            }
+            if(s[i]=='*'){
+                st.push(op1*op2);
+            }
+            if(s[i]=='^'){
+                st.push(pow(op1,op2));
             }
         }
     }
-    return pop();
+    return st.top(); 
 }
-
-int main() {
-    char exp[MAX];
-    printf("Enter a postfix expression: ");
-    scanf("%s", exp);
-    printf("Result = %d\n", evaluatePostfix(exp));
-    return 0;
+int main(){
+    string s;
+    cout<<"ENTER THE EXPRESSION -> ";
+    getline(cin,s);
+   cout<< post_Eval(s);
 }
