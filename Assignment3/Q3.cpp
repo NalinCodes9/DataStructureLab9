@@ -1,50 +1,46 @@
-#include <stdio.h>
-#include <string.h>
-#define MAX 100
+#include <iostream>
+#include <stack>
+using namespace std;
 
-char stack[MAX];
-int top = -1;
-
-void push(char c) {
-    if (top < MAX - 1) {
-        stack[++top] = c;
-    }
-}
-
-char pop() {
-    if (top >= 0) {
-        return stack[top--];
-    }
-    return '\0';
-}
-
-int isMatching(char a, char b) {
-    return (a == '(' && b == ')') ||
-           (a == '{' && b == '}') ||
-           (a == '[' && b == ']');
-}
-
-int isBalanced(char exp[]) {
-    for (int i = 0; i < strlen(exp); i++) {
-        if (exp[i] == '(' || exp[i] == '{' || exp[i] == '[') {
-            push(exp[i]);
-        } else if (exp[i] == ')' || exp[i] == '}' || exp[i] == ']') {
-            if (top == -1 || !isMatching(pop(), exp[i])) {
-                return 0;
+int control(string s)
+{
+    stack<char> st;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+        {
+            st.push(s[i]);
+        }
+        else if (s[i] == ')' || s[i] == '}' || s[i] == ']')
+        {
+            if (st.empty())
+            {
+                return false;
+            }
+            char top = st.top();
+            st.pop();
+            if ((s[i] == ')' && top != '(') ||
+                (s[i] == '}' && top != '{') ||
+                (s[i] == ']' && top != '['))
+            {
+                return false;
             }
         }
     }
-    return (top == -1);
+    return st.empty();
 }
 
-int main() {
-    char exp[MAX];
-    printf("Enter an expression: ");
-    scanf("%s", exp);
-    if (isBalanced(exp)) {
-        printf("Balanced\n");
-    } else {
-        printf("Not Balanced\n");
+int main()
+{
+    string s;
+    cout << "ENTER THE EXPRESSION :- ";
+    cin >> s;
+    if (control(s))
+    {
+        cout << "EXPR HAS BALANCED PARENTHESIS";
     }
-    return 0;
+    else
+    {
+        cout << "EXPR doesn't HAVE BALANCED PARENTHESIS";
+    }
 }
