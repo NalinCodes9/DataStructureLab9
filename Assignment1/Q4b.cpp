@@ -17,23 +17,23 @@ int main() {
     int mat1[100][100], mat2[100][100], result[100][100] = {0}; 
  
     cout << "Enter elements of first matrix:\n"; 
-    for (int i = 0; i < row1; ++i) 
-        for (int j = 0; j < col1; ++j) 
+    for (int i = 0; i < row1; i++) 
+        for (int j = 0; j < col1; j++) 
             cin >> mat1[i][j]; 
  
     cout << "Enter elements of second matrix:\n"; 
-    for (int i = 0; i < row2; ++i) 
-        for (int j = 0; j < col2; ++j) 
+    for (int i = 0; i < row2; i++) 
+        for (int j = 0; j < col2; j++) 
             cin >> mat2[i][j]; 
  
-    for (int i = 0; i < row1; ++i) 
-        for (int j = 0; j < col2; ++j) 
-            for (int k = 0; k < col1; ++k) 
+    for (int i = 0; i < row1; i++) 
+        for (int j = 0; j < col2; j++) 
+            for (int k = 0; k < col1; k++) 
                 result[i][j] += mat1[i][k] * mat2[k][j]; 
  
     cout << "Resultant matrix:\n"; 
-    for (int i = 0; i < row1; ++i) { 
-        for (int j = 0; j < col2; ++j) 
+    for (int i = 0; i < row1; i++) { 
+        for (int j = 0; j < col2; j++) 
             cout << result[i][j] << " "; 
         cout << endl; 
     } 
